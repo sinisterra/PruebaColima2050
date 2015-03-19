@@ -1,0 +1,51 @@
+body{
+	padding-top:70px;
+}
+
+
+.ejemplo-participacion{
+	height:200px;
+	padding:16px;
+}
+
+.sueno{
+	height:96px;
+	width:96px;
+	margin:0 auto;
+	background: url('../img/yo-sueno.png') no-repeat;
+	background-size: contain;
+}
+.propongo{
+	height:96px;
+	width:96px;
+	margin:0 auto;
+	background: url('../img/yo-propongo.png') no-repeat;
+	background-size: contain;
+}
+.participo{
+	height:96px;
+	width:96px;
+	margin:0 auto;
+	background: url('../img/yo-participo.png') no-repeat;
+	background-size: contain;
+}
+
+.light-green-text{
+	color:#8BC34A;
+}
+.red-text{
+	color:#F44336;
+}
+.grey-text{
+	color:#9E9E9E;
+}
+
+.inline{
+	display:inline-block;
+}
+
+.vertical-center{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}

@@ -1,0 +1,24 @@
+{
+  "name": "PruebaColima2050",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sinisterra/PruebaColima2050.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sinisterra/PruebaColima2050/issues"
+  },
+  "homepage": "https://github.com/sinisterra/PruebaColima2050",
+  "dependencies": {
+    "ejs": "^2.3.1",
+    "express": "^4.12.3",
+    "nunjucks": "^1.2.0"
+  }
+}
