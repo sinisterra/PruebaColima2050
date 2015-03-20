@@ -79,22 +79,28 @@
 				<!-- BARRA FORMAS DE PARTICIPACION -->
 				<div class="col-md-12 text-center">
 					<div class="col-xs-4">
-						<div class="sueno" ng-click="datos.tipo = 'sueno'"></div>
+						<div class="sueno" ng-click="datos.tipo = 'sueno'" 
+						ng-class="{'opacar':datos.tipo != 'sueno' || forma.success}"></div>
 						<p>YO SUEÑO</p>
 					</div>
 					<div class="col-xs-4">
-						<div class="propongo" ng-click="datos.tipo = 'propongo'"></div>
+						<div class="propongo" ng-click="datos.tipo = 'propongo'" 
+						ng-class="{'opacar':datos.tipo != 'propongo' || forma.success}"></div>
 						<p>YO PROPONGO</p>
 					</div>
 					<div class="col-xs-4">
-						<div class="participo" ng-click="datos.tipo = 'participo'"></div>
+						<div class="participo" ng-click="datos.tipo = 'participo'" ng-class="{'opacar':datos.tipo != 'participo' || forma.success}"></div>
 						<p>YO PARTICIPO</p>
 					</div>
 					<hr>
 				</div>
 				
+				<div ng-show="forma.success">
+					<h2 class="text-success text-center">¡Hemos recibido sus datos! <br> Gracias por participar.</h2>
+				</div>
+
 				<!-- FORMA -->
-				<div class="col-md-12" ng-show="datos.tipo && !forma.success">
+				<div class="col-md-12" ng-hide="forma.success">
 					<form class="form-horizontal" name="forma" ng-submit="enviarForma()" novalidate>
 						<!-- Entrada categoría -->
 						<div class="form-group" ng-class="{ 'has-error' : forma.inputCategoria.$invalid && !forma.inputCategoria.$pristine }" >
@@ -112,7 +118,7 @@
 						<div class="form-group" ng-class="{ 'has-error' : forma.inputDescripcion.$invalid && !forma.inputDescripcion.$pristine }">
 							<label for="inputDescripcion" class="col-lg-3 control-label">Descripción *</label>
 							<div class="col-lg-9">
-								<textarea class="form-control input-lg" rows="3" name="inputDescripcion" ng-model="datos.descripcion" required></textarea>
+								<textarea class="form-control input-lg" rows="3" name="inputDescripcion" ng-model="datos.descripcion" required ></textarea>
 							</div>
 						</div>
 
@@ -123,62 +129,78 @@
 								<span class="help-block">
 									Es importante que introduzcas la ubicación precisa del lugar al cual hace referencia tu participación, para ayudarte coloca en la casilla uno de los siguientes criterios: Nombre de la calle o de la zona y elige del listado el más próximo. Luego en el mapa arrastra el marcador hasta el lugar exacto para mayor precisión.
 								</span>
-								<input type="text" class="form-control input-lg" name="inputUbicacion"  ng-model="datos.ubicacion.direccion" required>
-								<span class="help-block">
-									Las informaciones adicionales debajo son completamente opcionales. La información personal no será proporcionada a terceros y será usada exclusivamente para informarle respecto a este reporte si así lo desea.
-								</span>
+								<input type="text" class="form-control input-lg" name="inputUbicacion"  ng-model="datos.ubicacion.direccion" required placeholder="Escribe la dirección...">
+								<div id="map_canvas">
+									<ui-gmap-google-map center="map.center" zoom="map.zoom">
+									<ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+								</ui-gmap-google-map>
 							</div>
+							<span class="help-block">
+								Las informaciones adicionales debajo son completamente opcionales. La información personal no será proporcionada a terceros y será usada exclusivamente para informarle respecto a este reporte si así lo desea.
+							</span>
 						</div>
+					</div>
 
-						<!-- entrada archivo -->
-						<div class="form-group">
-							<label for="inputImagen" class="col-lg-3 control-label">Agregar Imagen</label>
-							<div class="col-lg-9">
-								<input type="text" readonly="" class="form-control input-lg floating-label" placeholder="Buscar Archivo">
-								<input type="file" name="inputImagen" ng-model="datos.imagen">
-							</div>
+					<!-- entrada archivo -->
+					<div class="form-group">
+						<label for="inputImagen" class="col-lg-3 control-label">Agregar Imagen</label>
+						<div class="col-lg-9">
+							<input type="text" readonly="" class="form-control input-lg floating-label" placeholder="Buscar Archivo">
+							<input type="file" name="inputImagen" ng-model="datos.imagen">
 						</div>
+					</div>
 
-						<!-- entrada url -->
-						<div class="form-group">
-							<label for="inputMedia" class="col-lg-3 control-label">Agregar Video</label>
-							<div class="col-lg-9">
-								<input type="url" class="form-control input-lg" name="inputMedia" ng-model="datos.media" required placeholder="http://">
-							</div>
+					<!-- entrada url -->
+					<div class="form-group">
+						<label for="inputMedia" class="col-lg-3 control-label">Agregar Video</label>
+						<div class="col-lg-9">
+							<input type="url" class="form-control input-lg" name="inputMedia" ng-model="datos.media" placeholder="http://">
 						</div>
+					</div>
 
-						<!-- Entrada Nombre -->
-						<div class="form-group" ng-class="{ 'has-error' : forma.inputNombre.$invalid && !forma.inputNombre.$pristine }"> 
-							<label for="inputNombre" class="col-lg-3 control-label">Nombre * </label>
-							<div class="col-lg-9">
-								<input type="text" class="form-control input-lg" name="inputNombre" ng-model="datos.nombre" required>
-							</div>
+					<!-- Entrada Nombre -->
+					<div class="form-group" ng-class="{ 'has-error' : forma.inputNombre.$invalid && !forma.inputNombre.$pristine }"> 
+						<label for="inputNombre" class="col-lg-3 control-label">Nombre * </label>
+						<div class="col-lg-9">
+							<input type="text" class="form-control input-lg" name="inputNombre" ng-model="datos.nombre" required>
 						</div>
+					</div>
 
-						<!-- Entrada Correo Electrónico -->
-						<div class="form-group" ng-class="{ 'has-error' : forma.inputEmail.$invalid && !forma.inputEmail.$pristine }">
-							<label class="col-lg-3 control-label">Correo Electrónico * </label>
-							<div class="col-lg-9">
-								<input type="email" class="form-control input-lg" name="inputEmail" ng-model="datos.email" required>
-							</div>
+					<!-- Entrada Correo Electrónico -->
+					<div class="form-group" ng-class="{ 'has-error' : forma.inputEmail.$invalid && !forma.inputEmail.$pristine }">
+						<label class="col-lg-3 control-label">Correo Electrónico * </label>
+						<div class="col-lg-9">
+							<input type="email" class="form-control input-lg" name="inputEmail" ng-model="datos.email" required>
 						</div>
-						
-						<!-- Entrada Forma Contacto -->
-					
-						<!-- Botón para enviar forma -->
-						<div class="form-group text-right col-md-12">
-							<button class="btn btn-lg btn-success" type="submit" ng-disabled="forma.$invalid">Enviar</button>
+					</div>
+
+					<!-- Entrada Teléfono  -->
+					<div class="form-group">
+						<label class="col-lg-3 control-label">Teléfono * </label>
+						<div class="col-lg-9">
+							<input type="text" class="form-control input-lg" name="inputTelefono" ng-model="datos.telefono" required>
 						</div>
-					</form>
-				</div>
+					</div>
+
+					<div class="form group">
+						<label class="col-lg-3 control-label">Forma de Contacto</label>
+						<div class="col-lg-9">
+							<input type="radio" ng-model="datos.formaContacto" value="email">Correo
+							<input type="radio" ng-model="datos.formaContacto" value="tel">Teléfono
+							<input type="radio" ng-model="datos.formaContacto" value="ambos">Ambos
+						</div>
+					</div>
+
+					<!-- Botón para enviar forma -->
+					<div class="form-group text-right col-md-12">
+						<button class="btn btn-lg btn-success" type="submit" ng-disabled="forma.$invalid || !datos.tipo">Enviar</button>
+					</div>
+				</form>
 
 			</div>
 		</div>
-		<!-- Envío correcto de la forma -->
-		<div class="well" ng-show="forma.success">
-			<h2 class="text-success text-center">¡Hemos recibido sus datos! <br> Gracias por participar.</h2>
-		</div>
 	</div>
-	
+</div>
+
 </div>
 

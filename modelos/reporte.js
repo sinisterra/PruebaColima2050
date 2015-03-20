@@ -8,8 +8,45 @@ autoIncrement.initialize(connection);
 
 //modelo Reporte
 var reporteSchema  = new Schema({
-	tipo: String,
-	nombre: String,
+	tipo: {
+		type: String, 
+		required: true
+	},
+	categoria: {
+		type: String,
+		 required: true
+	},
+	descripcion: {
+		type: String,
+		required: true
+	},
+	ubicacion: {
+		direccion: {type:String, required: true},
+		loc: {
+			x: {type: Number, required: true},
+			y: {type: Number, required: true}
+		}
+	},
+	media: {
+		type: String
+	},
+	nombre:{
+		type: String,
+		required: true
+	},
+	email:{
+		type: String,
+		required:true
+	},
+	tel:{
+		type:String,
+		required:true
+	},
+	formaContacto:{
+		type:Array,
+		required:true
+	}
+
 });
 
 reporteSchema.plugin(autoIncrement.plugin, "Schema");

@@ -65,4 +65,6 @@ router.route('/categorias/:id')
 		})
 	})
 
+
+
 }

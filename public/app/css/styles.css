@@ -44,8 +44,21 @@ body{
 	display:inline-block;
 }
 
+.opacar{
+	opacity: 0.42;
+}
+
 .vertical-center{
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
+}
+
+#map_canvas .angular-google-map-container{ 
+	min-width:320px;
+	height:320px; 
+}
+
+.hidden{
+	display:none;
 }

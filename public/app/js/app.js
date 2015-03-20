@@ -1,4 +1,4 @@
-var app = angular.module('Colima2050', ['ui.router','ngResource'])
+var app = angular.module('Colima2050', ['ui.router','ngResource', 'uiGmapgoogle-maps'])
 
 app.config(function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise('/inicio');
@@ -23,4 +23,9 @@ app.config(function($stateProvider, $urlRouterProvider){
 });
 
 
-
+app.config(function(uiGmapGoogleMapApiProvider) {
+	uiGmapGoogleMapApiProvider.configure({
+		v: '3.17',
+		libraries: 'weather,geometry,visualization'
+	});
+})

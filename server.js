@@ -15,8 +15,8 @@ app.use(bodyParser.json());
 
 //Declarar rutas
 var router = express.Router();
-var apiCategorias = require('./api/categorias')(router);
-var apiReportes = require('./api/reportes')(router);
+var apiCategorias = require('./api/apiCategorias')(router);
+var apiReportes = require('./api/apiReportes')(router);
 
 app.use('/api', router);
 
