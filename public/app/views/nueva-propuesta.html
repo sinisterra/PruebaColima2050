@@ -3,7 +3,7 @@
 	<div class="row">
 		<!-- INFORMACIÓN PARTICIPACIÓN -->
 		<div class="col-md-4">
-			<h1>Nueva Participación <br>
+			<h1>Nueva Propuesta <br>
 				<small>
 					Revisa cómo puedes participar en Colima 20-50.
 				</small>
@@ -79,122 +79,106 @@
 				<!-- BARRA FORMAS DE PARTICIPACION -->
 				<div class="col-md-12 text-center">
 					<div class="col-xs-4">
-						<div class="sueno"></div>
+						<div class="sueno" ng-click="datos.tipo = 'sueno'"></div>
 						<p>YO SUEÑO</p>
 					</div>
 					<div class="col-xs-4">
-						<div class="propongo"></div>
+						<div class="propongo" ng-click="datos.tipo = 'propongo'"></div>
 						<p>YO PROPONGO</p>
 					</div>
 					<div class="col-xs-4">
-						<div class="participo"></div>
+						<div class="participo" ng-click="datos.tipo = 'participo'"></div>
 						<p>YO PARTICIPO</p>
 					</div>
 					<hr>
 				</div>
 				
 				<!-- FORMA -->
-				<div class="col-md-12">
-					<form class="form-horizontal">
-						<!-- entrada categoria -->
-						<div class="form-group form-group-material-blue">
-							<label for="select" class="col-lg-3 control-label">Categoría</label>
+				<div class="col-md-12" ng-show="datos.tipo && !forma.success">
+					<form class="form-horizontal" name="forma" ng-submit="enviarForma()" novalidate>
+						<!-- Entrada categoría -->
+						<div class="form-group" ng-class="{ 'has-error' : forma.inputCategoria.$invalid && !forma.inputCategoria.$pristine }" >
+							<label for="inputCategoria" class="col-lg-3 control-label">Categoría * </label>
 							<div class="col-lg-9">
-								<select class="form-control" id="select" required>
-									<option></option>
+								<select class="form-control input-md" name="inputCategoria" ng-model="datos.categoria" required>
+									<optgroup ng-repeat="(nombre, descripciones) in categorias" label="{{nombre}}">
+										<option ng-repeat="d in descripciones" value="{{d._id}}">{{d.descripcion}}</option>
+									</optgroup>
 								</select>
 							</div>
 						</div>
-						<!-- entrada descripción -->
-						<div class="form-group form-group-material-blue">
-							<label for="textArea" class="col-lg-3 control-label">Descripción</label>
+
+						<!-- Entrada descripción -->
+						<div class="form-group" ng-class="{ 'has-error' : forma.inputDescripcion.$invalid && !forma.inputDescripcion.$pristine }">
+							<label for="inputDescripcion" class="col-lg-3 control-label">Descripción *</label>
 							<div class="col-lg-9">
-								<textarea class="form-control" rows="3" id="textArea" required></textarea>
+								<textarea class="form-control input-lg" rows="3" name="inputDescripcion" ng-model="datos.descripcion" required></textarea>
 							</div>
 						</div>
-						<!-- entrada ubicación -->
-						<div class="form-group form-group-material-blue">
-							<label for="inputUbicacion" class="col-lg-3 control-label">Ubicación</label>
+
+						<!-- Entrada ubicación -->
+						<div class="form-group" ng-class="{ 'has-error' : forma.inputUbicacion.$invalid && !forma.inputUbicacion.$pristine }">
+							<label for="inputUbicacion" class="col-lg-3 control-label">Ubicación *</label>
 							<div class="col-lg-9">
 								<span class="help-block">
 									Es importante que introduzcas la ubicación precisa del lugar al cual hace referencia tu participación, para ayudarte coloca en la casilla uno de los siguientes criterios: Nombre de la calle o de la zona y elige del listado el más próximo. Luego en el mapa arrastra el marcador hasta el lugar exacto para mayor precisión.
 								</span>
-								<input type="text" class="form-control" id="inputUbicacion"  required>
+								<input type="text" class="form-control input-lg" name="inputUbicacion"  ng-model="datos.ubicacion.direccion" required>
 								<span class="help-block">
 									Las informaciones adicionales debajo son completamente opcionales. La información personal no será proporcionada a terceros y será usada exclusivamente para informarle respecto a este reporte si así lo desea.
 								</span>
 							</div>
 						</div>
+
 						<!-- entrada archivo -->
-						<div class="form-group form-group-material-blue">
-							<label for="inputFile" class="col-lg-3 control-label">Agregar Imagen</label>
+						<div class="form-group">
+							<label for="inputImagen" class="col-lg-3 control-label">Agregar Imagen</label>
 							<div class="col-lg-9">
-								<input type="text" readonly="" class="form-control floating-label" placeholder="Buscar Archivo">
-								<input type="file" id="inputFile" multiple="">
+								<input type="text" readonly="" class="form-control input-lg floating-label" placeholder="Buscar Archivo">
+								<input type="file" name="inputImagen" ng-model="datos.imagen">
 							</div>
 						</div>
+
 						<!-- entrada url -->
-						<div class="form-group form-group-material-blue">
+						<div class="form-group">
 							<label for="inputMedia" class="col-lg-3 control-label">Agregar Video</label>
 							<div class="col-lg-9">
-								<input type="url" class="form-control" id="inputMedia"  required>
+								<input type="url" class="form-control input-lg" name="inputMedia" ng-model="datos.media" required placeholder="http://">
 							</div>
 						</div>
-						<!-- entrada nombre -->
-						<div class="form-group form-group-material-blue">
-							<label for="inputNombre" class="col-lg-3 control-label">Nombre*</label>
+
+						<!-- Entrada Nombre -->
+						<div class="form-group" ng-class="{ 'has-error' : forma.inputNombre.$invalid && !forma.inputNombre.$pristine }"> 
+							<label for="inputNombre" class="col-lg-3 control-label">Nombre * </label>
 							<div class="col-lg-9">
-								<input type="text" class="form-control" id="inputNombre" required>
+								<input type="text" class="form-control input-lg" name="inputNombre" ng-model="datos.nombre" required>
 							</div>
 						</div>
-						<!-- entrada email -->
-						<div class="form-group form-group-material-blue">
-							<label for="inputEmail" class="col-lg-3 control-label">Correo Electrónico*</label>
+
+						<!-- Entrada Correo Electrónico -->
+						<div class="form-group" ng-class="{ 'has-error' : forma.inputEmail.$invalid && !forma.inputEmail.$pristine }">
+							<label class="col-lg-3 control-label">Correo Electrónico * </label>
 							<div class="col-lg-9">
-								<input type="email" class="form-control" id="inputEmail"  required>
+								<input type="email" class="form-control input-lg" name="inputEmail" ng-model="datos.email" required>
 							</div>
 						</div>
-						<!-- entrada telefono -->
-						<div class="form-group form-group-material-blue">
-							<label for="inputTelefono" class="col-lg-3 control-label">Teléfono*</label>
-							<div class="col-lg-9">
-								<input type="tel" class="form-control" id="inputTelefono" placeholder="">
-							</div>
-						</div>
-						<!-- entrada forma de contacto -->
-						<div class="form-group form-group-material-blue">
-							<label class="col-lg-3 control-label">Forma de contacto</label>
-							<div class="col-lg-9">
-								<div class="radio radio-success inline">
-									<label>
-										<input type="radio" name="sample1" value="option1" checked="">
-										Correo
-									</label>
-								</div>
-								<div class="radio radio-success inline">
-									<label>
-										<input type="radio" name="sample1" value="option1">
-										Teléfono
-									</label>
-								</div>
-								<div class="radio radio-success inline">
-									<label>
-										<input type="radio" name="sample1" value="option1">
-										Ambos
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-lg-12 text-right">
-								<button class="btn btn-material-blue">Enviar</button>
-							</div>
+						
+						<!-- Entrada Forma Contacto -->
+					
+						<!-- Botón para enviar forma -->
+						<div class="form-group text-right col-md-12">
+							<button class="btn btn-lg btn-success" type="submit" ng-disabled="forma.$invalid">Enviar</button>
 						</div>
 					</form>
 				</div>
+
 			</div>
 		</div>
+		<!-- Envío correcto de la forma -->
+		<div class="well" ng-show="forma.success">
+			<h2 class="text-success text-center">¡Hemos recibido sus datos! <br> Gracias por participar.</h2>
+		</div>
 	</div>
-
+	
 </div>
 
