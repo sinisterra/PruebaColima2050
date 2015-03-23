@@ -2,9 +2,10 @@ var sanitizer = require('sanitizer');
 
 var Reporte = require('../modelos/reporte');
 module.exports = function(router){
-	router.route('/reportes')
+
+router.route('/reportes')
 	.get(function(req, res){
-		Reporte.find(function(err, reportes){
+		Reporte.find({}).sort({fecha:-1}).exec(function(err, reportes){
 			if(err)
 				res.json(err)
 
@@ -31,7 +32,7 @@ module.exports = function(router){
 			email: sanitizer.escape(req.body.email),
 			tel: sanitizer.escape(req.body.telefono),
 			formaContacto: sanitizer.escape(req.body.formaContacto),
-			fecha: Date.now(),
+			fecha: new Date.now(),
 		});
 
 

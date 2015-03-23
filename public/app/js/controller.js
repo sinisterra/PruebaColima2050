@@ -9,7 +9,7 @@ app.factory('Reportes', function($resource){
 });
 
 app.factory('Stats', function($resource){
-	return $resource('/api/stats/:tipo', {tipo: '@tipo'});
+	return $resource('/api/stats/:tipo/:num', {tipo: '@tipo', num:'@num'});
 })
 
 app.controller('NuevaPropuestaCtrl', function($scope, $http,
@@ -113,6 +113,8 @@ app.controller('InicioCtrl', function($scope, Stats){
 		total:0
 	}
 
+	$scope.datos = {}
+
 	Stats.get({tipo: "resumen-general"}, function(data){
 
 		$scope.datos = data;
@@ -127,11 +129,11 @@ app.controller('InicioCtrl', function($scope, Stats){
 
 		var recuento = new Recuento(data);
 
-
 	});
 
-	
-	
+	Stats.query({tipo: "listado", num:5}, function(reportes){
+		$scope.reportes = reportes;
+	});	
 	var Grafica = function(idDiv, data, tipo){
 		var self = {
 			chart : {},
@@ -189,10 +191,15 @@ app.controller('InicioCtrl', function($scope, Stats){
 		}
 
 		self.cuentaTotal();
-
-
 	}
-	
-
 });
 
+app.controller('ParticipacionesCtrl', function($scope, Reportes, Stats){
+	Reportes.query(function(reportes){
+		$scope.reportes = reportes;
+	});
+
+	Stats.get({tipo: 'resumen-general'}, function(datos){
+		$scope.datos = datos;
+	})
+});

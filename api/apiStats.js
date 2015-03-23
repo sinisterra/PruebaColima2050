@@ -64,15 +64,48 @@ module.exports = function(router){
 			
 		});
 
-
-
-
-
-
-
-
 	});
 
+	router.route('/stats/listado/:num')
+	.get(function(req, res){
+		Reporte.find({}).limit(req.params.num).sort({_id:-1}).exec(function(err, reportes){
+			if(err)
+				res.send(err)
+			res.json(reportes);
+		});
+	});
+
+	router.route('/stats/ubicaciones/')
+	.get(function(req, res){
+		var data = {
+			"ubicaciones": [],
+			"descripciones": {}
+		}
+		Reporte.find({}).select({_id: 0, ubicacion: 1}).exec(function(err, ubicaciones){
+			if(err)
+				res.send(err)
+
+			data["ubicaciones"] = ubicaciones;
+
+			Categoria.find({},{descripcion:1}, function(err, descripciones){
+				if(err)
+					res.send(err)
+
+
+				//convertir arreglo a objeto {idCategoria: descripcion}
+				for(d in descripciones){
+					d = descripciones[d]
+					var idCategoria = d._id
+					data["descripciones"][idCategoria] = d.descripcion;
+				}
+
+
+				res.send(data);
+
+			});
+
+		});
+	})
 
 
 }

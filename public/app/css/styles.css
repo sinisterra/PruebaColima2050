@@ -11,28 +11,31 @@ body{
 .sueno{
 	height:96px;
 	width:96px;
-	margin:0 auto;
 	background: url('../img/yo-sueno.png') no-repeat;
 	background-size: contain;
 }
 .propongo{
 	height:96px;
 	width:96px;
-	margin:0 auto;
 	background: url('../img/yo-propongo.png') no-repeat;
 	background-size: contain;
 }
 .participo{
 	height:96px;
 	width:96px;
-	margin:0 auto;
 	background: url('../img/yo-participo.png') no-repeat;
 	background-size: contain;
 }
 
-
-
-
+.centered{
+	margin:0 auto;
+}
+.como-funciona{
+	font-size:1.3em;
+}
+.como-funciona strong{
+	color:#8BC34A;
+}
 .light-green-text{
 	color:#8BC34A;
 }
@@ -57,10 +60,33 @@ body{
 	display:none;
 }
 
-#contadores{
+#contadores, #graficas{
 	margin-bottom: 2em;
 }
 .contador{
 	font-weight: bold;
 	font-size: 3em;
+}
+
+.logo-sm{
+	width:32px;
+	height:32px;
+	
+}
+
+.descripcion{
+	width:480px;
+}
+
+.img-como-funciona{
+	margin-top:6em;
+}
+.bold{
+	font-weight: bold;
+}
+
+@media(max-width: 768px){
+	.img-como-funciona{
+		margin:0;
+	}
 }

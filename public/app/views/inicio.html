@@ -1,27 +1,32 @@
-<!-- Carrusel de presentación -->
-<section class="row">
-	
-</section>
 
 <!-- Cómo funciona -->
 <section class="row">
-	<div class="col-md-6">
-		<h2>¿Cómo funciona?</h2>
-		<p>
-			1.- Registra tu participación: Proporciona tanta información como puedas (ubicación, fecha, fotos, videos y cualquier otra fuente de confianza).
+	<div class="col-md-6 col-md-push-6">
+			
+		<img src="/public/app/img/img-como-funciona.png" alt="¿Cómo funciona?" class="img-responsive img-como-funciona" >
+	</div>
+	<div class="col-md-6 col-md-pull-6">
+		<h1 class="light-green-text bold">¿Cómo funciona?</h1>
+		<p class="como-funciona">
+			1.- <strong>Registra tu participación</strong> Proporciona tanta información como puedas (ubicación, fecha, fotos, videos y cualquier otra fuente de confianza).
+		</p>
+		<p class="como-funciona">
 
-			2.- Selecciona la categoría: Esto permitirá la atención, monitoreo y seguimiento puntual a tu participación.
+			2.- <strong>Selecciona la categoría:</strong> Esto permitirá la atención, monitoreo y seguimiento puntual a tu participación.
+		</p>
+		<p class="como-funciona">
 
-			3.- Clasifica tu participación: recuerda que puedes agregar lo que sueñas para Colima en el futuro; también propuestas específicas que te gustaría aportar para tu municipio o estado; además, puedes agregarte a nuestro grupo y participar activamente en espacios de tu interés.
+			3.- <strong>Clasifica tu participación:</strong> recuerda que puedes agregar lo que sueñas para Colima en el futuro; también propuestas específicas que te gustaría aportar para tu municipio o estado; además, puedes agregarte a nuestro grupo y participar activamente en espacios de tu interés.
+		</p>
+		<p class="como-funciona">
 
-			4.- Envía: una vez reunida la información envía tu mensaje a través de nuestros medios de recepción disponibles: Web, Facebook, Twitter, Email.
-
+			4.- <strong>Envía:</strong> una vez reunida la información envía tu mensaje a través de nuestros medios de recepción disponibles: Web, Facebook, Twitter, Email.
+		</p>
+		<p class="como-funciona">
 			Uno de nuestros colaboradores te contactará en caso de requerir mayor información sobre tu participación.
 		</p>
 	</div>
-	<div class="col-md-6">
-		<!-- <img src="/public/img/portada.png" alt=""> -->
-	</div>
+	
 	<div class="col-md-12 text-center">
 		<button class="btn btn-lg btn-success" ui-sref="nueva-propuesta">Nueva Propuesta</button>
 		<button class="btn btn-lg btn-danger" ui-sref="nueva-pregunta">Preguntar Ahora</button>
@@ -30,11 +35,11 @@
 
 <!-- Resumen General -->
 <section class="row">
-	<h2>Resumen General</h2>
+	<h1 class="light-green-text bold">Resumen General</h1>
 	<!-- Contadores Generales -->
 	<div class="row text-center" id="contadores">
 		<div class="col-md-12">
-			
+
 			<div class="col-sm-3 col-xs-6">
 				<span class="contador" ng-bind="recuento.total"></span>
 				<p>
@@ -69,49 +74,100 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Gráficas -->
 	<div class="row text-center" id="graficas">
 		<div class="col-md-12">
-			
+
 			<div class="col-md-4">
 				<canvas id="graficaSueno"></canvas>
-				<h4><strong>YO SUEÑO</strong></h4>
+				<h4><strong>YO SUEÑO</strong><br>
+					Totales por categoría
+				</h4>
 			</div>
 			<div class="col-md-4">
 				<canvas id="graficaPropongo"></canvas>
-				<h4><strong>YO PROPONGO</strong></h4>
+				<h4><strong>YO PROPONGO</strong><br>
+					Totales por categoría
+				</h4>
 			</div>
 			<div class="col-md-4">
 				<canvas id="graficaParticipo"></canvas>
-				<h4><strong>YO PARTICIPO</strong></h4>
+				<h4><strong>YO PARTICIPO</strong><br>
+					Totales por categoría
+				</h4>
 			</div>
 		</div>
-		
+
 	</div>
 </section>
 
 <!-- Últimas Participaciones -->
 <section class="row">
-	
+	<h1 class="light-green-text bold">Últimas Participaciones</h1>
 	<!-- como tabla -->
 	<div class="col-md-12 hidden-xs hidden-sm">
 		<table class="table table-hover table-striped">
+			<!-- ENCABEZADOS -->
 			<tr>
 				<th>
 					<span class="glyphicon glyphicon-calendar"></span>
 					<span>FECHA Y HORA</span>
 				</th>
 				<th>
-					
+					<span>TIPO DE PARTICIPACIÓN</span>
+				</th>
+				<th>
+					<span>CATEGORÍA</span>
+				</th>
+				<th>
+					<span>REPORTE</span>
+				</th>
+				<th>
+					<span>UBICACIÓN</span>
 				</th>
 			</tr>
-			
+			<!-- ENTRADAS -->
+			<tr ng-repeat="reporte in reportes">
+				<td>
+					<span ng-bind="reporte.fecha | date:'dd/MM/yyyy'"></span><br>
+					<span ng-bind="reporte.fecha | date:'hh:mm'"></span>
+				</td>
+				<td>
+					<span ng-show="reporte.tipo == 'sueno'">
+						<p>
+							<div class="sueno logo-sm"></div>
+							<span>YO SUEÑO</span>
+						</p>
+					</span>
+					<span ng-show="reporte.tipo == 'propongo'">
+						<div class="propongo logo-sm"></div>
+						<span>YO PROPONGO</span>
+					</span>
+					<span ng-show="reporte.tipo == 'participo'">
+						<div class="participo logo-sm"></div>
+						<span>YO PARTICIPO</span>
+					</span>
+				</td>
+				<td><span ng-bind="datos['descripciones'][reporte.categoria]"></span></td>
+				<td><span ng-bind="reporte.descripcion" class='text-overflow'></span></td>
+				<td><span ng-bind="reporte.ubicacion.direccion"></span></td>
+
+			</tr>
 		</table>
 	</div>
 
 	<!-- como list-group -->
-	<div class="col-md-12 hidden-lg hidden-md">
-		
+	<div class="row hidden-lg hidden-md">
+		<div class="col-md-12">
+
+		</div>
+	</div>
+
+	<div class="row text-center">
+		<div class="col-md-12">
+			<button class="btn btn-lg btn-success" ui-sref="participaciones">Ver Más</button>
+		</div>
 	</div>
 </section>
+

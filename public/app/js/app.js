@@ -20,7 +20,8 @@ app.config(function($stateProvider, $urlRouterProvider){
 	})
 	.state('participaciones', {
 		url: '/participaciones',
-		templateUrl: "/public/app/views/participaciones.html"
+		templateUrl: "/public/app/views/participaciones.html",
+		controller:"ParticipacionesCtrl"
 	})
 });
 
