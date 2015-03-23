@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 var router = express.Router();
 var apiCategorias = require('./api/apiCategorias')(router);
 var apiReportes = require('./api/apiReportes')(router);
+var apiStats = require('./api/apiStats')(router);
 
 app.use('/api', router);
 

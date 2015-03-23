@@ -2,12 +2,12 @@ body{
 	padding-top:70px;
 }
 
-
-.ejemplo-participacion{
-	height:200px;
-	padding:16px;
+#map_canvas .angular-google-map-container{ 
+	min-width:320px;
+	height:320px; 
 }
 
+/*Helpers*/
 .sueno{
 	height:96px;
 	width:96px;
@@ -30,6 +30,9 @@ body{
 	background-size: contain;
 }
 
+
+
+
 .light-green-text{
 	color:#8BC34A;
 }
@@ -39,26 +42,25 @@ body{
 .grey-text{
 	color:#9E9E9E;
 }
-
 .inline{
 	display:inline-block;
 }
-
 .opacar{
 	opacity: 0.42;
 }
-
 .vertical-center{
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
 }
-
-#map_canvas .angular-google-map-container{ 
-	min-width:320px;
-	height:320px; 
-}
-
 .hidden{
 	display:none;
+}
+
+#contadores{
+	margin-bottom: 2em;
+}
+.contador{
+	font-weight: bold;
+	font-size: 3em;
 }

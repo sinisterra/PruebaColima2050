@@ -107,7 +107,7 @@
 							<label for="inputCategoria" class="col-lg-3 control-label">Categoría * </label>
 							<div class="col-lg-9">
 								<select class="form-control input-md" name="inputCategoria" ng-model="datos.categoria" required>
-									<optgroup ng-repeat="(nombre, descripciones) in categorias" label="{{nombre}}">
+									<optgroup ng-repeat="(nombre, descripciones) in categorias track by $index" label="{{nombre}}">
 										<option ng-repeat="d in descripciones" value="{{d._id}}">{{d.descripcion}}</option>
 									</optgroup>
 								</select>
@@ -185,7 +185,7 @@
 					<div class="form group">
 						<label class="col-lg-3 control-label">Forma de Contacto</label>
 						<div class="col-lg-9">
-							<input type="radio" ng-model="datos.formaContacto" value="email">Correo
+							<input type="radio" ng-model="datos.formaContacto" value="email" required>Correo
 							<input type="radio" ng-model="datos.formaContacto" value="tel">Teléfono
 							<input type="radio" ng-model="datos.formaContacto" value="ambos">Ambos
 						</div>
@@ -198,8 +198,11 @@
 				</form>
 
 			</div>
+
 		</div>
 	</div>
+	<!-- Envío correcto de la forma -->
+
 </div>
 
 </div>

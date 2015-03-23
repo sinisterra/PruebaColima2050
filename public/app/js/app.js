@@ -1,16 +1,18 @@
 var app = angular.module('Colima2050', ['ui.router','ngResource', 'uiGmapgoogle-maps'])
 
+//definir rutas y controladores dentro de ui-router
 app.config(function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise('/inicio');
 	$stateProvider
 	.state('inicio', {
 		url: '/inicio',
-		templateUrl: "/public/app/views/inicio.html"
+		templateUrl: "/public/app/views/inicio.html",
+		controller:"InicioCtrl",
 	})
 	.state('nueva-propuesta', {
 		url: '/nueva-propuesta',
 		templateUrl: "/public/app/views/nueva-propuesta.html",
-		controller:"NuevaPropuestaCtrl"
+		controller:"NuevaPropuestaCtrl",
 	})
 	.state('nueva-pregunta', {
 		url: '/nueva-pregunta',

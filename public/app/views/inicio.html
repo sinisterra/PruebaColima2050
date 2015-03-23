@@ -20,11 +20,11 @@
 		</p>
 	</div>
 	<div class="col-md-6">
-		<img src="/public/img/portada.png" alt="">
+		<!-- <img src="/public/img/portada.png" alt=""> -->
 	</div>
 	<div class="col-md-12 text-center">
-		<button class="btn btn-lg btn-success">Nueva Propuesta</button>
-		<button class="btn btn-lg btn-danger">Preguntar Ahora</button>
+		<button class="btn btn-lg btn-success" ui-sref="nueva-propuesta">Nueva Propuesta</button>
+		<button class="btn btn-lg btn-danger" ui-sref="nueva-pregunta">Preguntar Ahora</button>
 	</div>
 </section>
 
@@ -32,20 +32,62 @@
 <section class="row">
 	<h2>Resumen General</h2>
 	<!-- Contadores Generales -->
-	<div class="col-md-12 text-center">
-		<div class="col-sm-2 col-xs-4">01</div>
-		<div class="col-sm-2 col-xs-4">02</div>
-		<div class="col-sm-2 col-xs-4">03</div>
-		<div class="col-sm-2 col-xs-6">04</div>
-		<div class="col-sm-2 col-xs-6">05</div>
+	<div class="row text-center" id="contadores">
+		<div class="col-md-12">
+			
+			<div class="col-sm-3 col-xs-6">
+				<span class="contador" ng-bind="recuento.total"></span>
+				<p>
+					<small>
+						<strong>PARTICIPACIONES RECIBIDAS</strong>
+					</small>
+				</p>
+			</div>
+			<div class="col-sm-3 col-xs-6">
+				<span class="contador" ng-bind="recuento.sueno"></span>
+				<p>
+					<small>
+						<strong>YO SUEÑO</strong>
+					</small>
+				</p>
+			</div>
+			<div class="col-sm-3 col-xs-6">
+				<span class="contador" ng-bind="recuento.propongo"></span>
+				<p>
+					<small>
+						<strong>YO PROPONGO</strong>
+					</small>
+				</p>
+			</div>
+			<div class="col-sm-3 col-xs-6">
+				<span class="contador" ng-bind="recuento.participo"></span>
+				<p>
+					<small>
+						<strong>YO PARTICIPO</strong>
+					</small>
+				</p>
+			</div>
+		</div>
 	</div>
 	
 	<!-- Gráficas -->
-	<div class="col-md-12 text-center">
-		<div class="col-md-3">01</div>
-		<div class="col-md-3">02</div>
-		<div class="col-md-3">03</div>
-		<div class="col-md-3">04</div>
+	<div class="row text-center" id="graficas">
+		<div class="col-md-12">
+			
+			<div class="col-md-4">
+				<canvas id="graficaSueno"></canvas>
+				<h4><strong>YO SUEÑO</strong></h4>
+			</div>
+			<div class="col-md-4">
+				<canvas id="graficaPropongo"></canvas>
+				<h4><strong>YO PROPONGO</strong></h4>
+			</div>
+			<div class="col-md-4">
+				<canvas id="graficaParticipo"></canvas>
+				<h4><strong>YO PARTICIPO</strong></h4>
+			</div>
+		</div>
+		
 	</div>
 </section>
 
@@ -64,9 +106,7 @@
 					
 				</th>
 			</tr>
-			<tr ng-repeat="">
-				
-			</tr>
+			
 		</table>
 	</div>
 

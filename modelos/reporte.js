@@ -45,6 +45,10 @@ var reporteSchema  = new Schema({
 	formaContacto:{
 		type:Array,
 		required:true
+	},
+	fecha:{
+		type:Date,
+		required:true
 	}
 
 });

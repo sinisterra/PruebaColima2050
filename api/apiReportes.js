@@ -31,7 +31,10 @@ module.exports = function(router){
 			email: sanitizer.escape(req.body.email),
 			tel: sanitizer.escape(req.body.telefono),
 			formaContacto: sanitizer.escape(req.body.formaContacto),
+			fecha: Date.now(),
 		});
+
+
 
 		if(req.body.formaContacto == "ambos"){
 			reporte.formaContacto = ['email','tel']
@@ -76,19 +79,7 @@ module.exports = function(router){
 		})
 	})
 
-	router.route('/reportes/stats/resumen-general')
-	.get(function(req, res){
-			//buscar todos los tipos de reportes
-			
-			Reporte.find({}, {_id: 0, tipo: 1}).exec(function(err, data){
-				if(err)
-					res.json(err);
-
-
-				res.json(data);
-
-			});
-		})
+	
 
 
 }
