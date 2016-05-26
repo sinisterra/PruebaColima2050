@@ -17,9 +17,12 @@
   },
   "homepage": "https://github.com/sinisterra/PruebaColima2050",
   "dependencies": {
+    "body-parser": "^1.15.1",
     "ejs": "^2.3.1",
     "express": "^4.12.3",
+    "mongoose": "^4.4.19",
+    "mongoose-auto-increment": "^5.0.1",
     "nunjucks": "^1.2.0",
-    "sanitizer": "^0.1.2",
+    "sanitizer": "^0.1.2"
   }
 }
